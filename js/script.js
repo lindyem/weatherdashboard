@@ -15,9 +15,8 @@ $("#searchBtn").click(function () {
       "http://openweathermap.org/img/w/" + response.weather[0].icon + ".png";
 
     $("#name").text(response.name);
-    $("#date").text(moment().format("L"));
-    //$("#img");
-
+    $("#date").text(`(${moment().format("L")})`); //` and $ to concat string interpolation
+    $("#weatherIcon").attr("src", icon);
     $("#temp").text(response.main.temp); //this is how to do it without making vars for each data
     $("#humidity").text(response.main.humidity);
     $("#wind").text(response.wind.speed);
@@ -27,3 +26,4 @@ $("#searchBtn").click(function () {
   });
 });
 //forecast function
+//uvINDEX
