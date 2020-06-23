@@ -28,20 +28,30 @@ $("#searchBtn").click(function () {
       url: uvURL,
       method: "GET",
     }).then(function (response) {
-      console.log(response);
       $("#uvIndex").text(response.value);
     });
 
     //Render forecast
-    var forecastURL = `https://openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${key}`;
+    var forecastURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${key}`;
     $.ajax({
       url: forecastURL,
       method: "GET",
     }).then(function (response) {
-      console.log(response);
+      var day1 = response.list[4];
+      var day2 = response.list[12];
+      var day3 = response.list[20];
+      var day4 = response.list[28];
+      var day5 = response.list[36];
+
+     $("#day1").html(`
+      <div>${}</div>
+      <div><img/></div>
+      <div>Temp:</div>
+      <div>Humidity</div>
+     `);
     });
   });
 });
 
 //forecast function
-//uvINDEX
+
