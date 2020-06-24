@@ -1,8 +1,29 @@
+renderSearchHistory();
+
+function renderSearchHistory() {
+  $("#searchHistory").empty();
+
+  for (var i = 0; i < localStorage.length; i++) {
+    var newDiv = $("<div>");
+    newDiv.text(localStorage.key(i));
+    newDiv.addClass("searchHistoryBox");
+    newDiv.attr("city-name", localStorage.key(i));
+    $("#searchHistory").prepend(newDiv);
+  }
+}
+
 //Event Listeners
+$(".searchHistoryBox").click(function () {
+  var cityName = $(this).attr("city-name");
+  console.log("im in with", cityName);
+});
+
 $("#searchBtn").click(function () {
   var search = $("#searchInput").val();
-  var key = "1a53eae6d73210b8584d1690b01b9a73";
 
+  localStorage.setItem(search, search);
+
+  var key = "1a53eae6d73210b8584d1690b01b9a73";
   var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${key}&units=imperial`;
   $.ajax({
     url: queryURL,
@@ -44,7 +65,7 @@ $("#searchBtn").click(function () {
       var day5 = response.list[36];
 
       $("#day1").html(`
-      <div>${moment(day1.dt_text).format("L")}</div>
+      <div>${moment(day1.dt_text).format("L")}</>
       <div><img src="${`http://openweathermap.org/img/w/${day1.weather[0].icon}.png`}"/></div>
       <div>Temp: ${day1.main.temp}</div>
       <div>Humidity: ${day1.main.humidity}</div>
@@ -77,4 +98,4 @@ $("#searchBtn").click(function () {
   });
 });
 
-//forecast function
+$("#searchHistory").prepend(newDiv);
