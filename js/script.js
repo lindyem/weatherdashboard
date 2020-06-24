@@ -32,7 +32,7 @@ $("#searchBtn").click(function () {
     });
 
     //Render forecast
-    var forecastURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${key}`;
+    var forecastURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${key}&units=imperial`;
     $.ajax({
       url: forecastURL,
       method: "GET",
@@ -43,15 +43,38 @@ $("#searchBtn").click(function () {
       var day4 = response.list[28];
       var day5 = response.list[36];
 
-     $("#day1").html(`
-      <div>${}</div>
-      <div><img/></div>
-      <div>Temp:</div>
-      <div>Humidity</div>
+      $("#day1").html(`
+      <div>${moment(day1.dt_text).format("L")}</div>
+      <div><img src="${`http://openweathermap.org/img/w/${day1.weather[0].icon}.png`}"/></div>
+      <div>Temp: ${day1.main.temp}</div>
+      <div>Humidity: ${day1.main.humidity}</div>
+     `);
+      $("#day2").html(`
+      <div>${moment(day1.dt_text).format("L")}</div>
+      <div><img src="${`http://openweathermap.org/img/w/${day2.weather[0].icon}.png`}"/></div>
+      <div>Temp: ${day2.main.temp}</div>
+      <div>Humidity: ${day2.main.humidity}</div>
+     `);
+      $("#day3").html(`
+      <div>${moment(day3.dt_text).format("L")}</div>
+      <div><img src="${`http://openweathermap.org/img/w/${day3.weather[0].icon}.png`}"/></div>
+      <div>Temp: ${day3.main.temp}</div>
+      <div>Humidity: ${day3.main.humidity}</div>
+     `);
+      $("#day4").html(`
+      <div>${moment(day4.dt_text).format("L")}</div>
+      <div><img src="${`http://openweathermap.org/img/w/${day4.weather[0].icon}.png`}"/></div>
+      <div>Temp: ${day4.main.temp}</div>
+      <div>Humidity: ${day4.main.humidity}</div>
+     `);
+      $("#day5").html(`
+      <div>${moment(day5.dt_text).format("L")}</div>
+      <div><img src="${`http://openweathermap.org/img/w/${day5.weather[0].icon}.png`}"/></div>
+      <div>Temp: ${day5.main.temp}</div>
+      <div>Humidity: ${day5.main.humidity}</div>
      `);
     });
   });
 });
 
 //forecast function
-

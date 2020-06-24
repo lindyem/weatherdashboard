@@ -8,6 +8,14 @@
       integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="path/to/font-awesome/css/font-awesome.min.css"
+    />
+    <script
+      src="https://kit.fontawesome.com/788f479533.js"
+      crossorigin="anonymous"
+    ></script>
     <script
       src="https://code.jquery.com/jquery-3.4.1.min.js"
       integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
@@ -34,7 +42,9 @@
                 aria-label="Enter city"
               />
               <div id="searchBtn" class="input-group-append">
-                <span class="input-group-text">Search</span>
+                <span class="input-group-text">
+                  <i class="fas fa-search"></i>
+                </span>
               </div>
             </div>
             <div id="searchHistory"></div>
@@ -44,15 +54,15 @@
               style="border: 1px solid lightgray; border-radius: 2px;"
               id="cityWeather"
             >
-              <div style="font-size: 1.5em">
-                <span id="name"></span>
-                <span id="date"></span>
-                <img id="weatherIcon" />
+              <div style="font-size: 1.5em;">
+                <span class="ml-2" id="name"></span>
+                <span class="ml-2" id="date"></span>
+                <img class="ml-2" id="weatherIcon" />
               </div>
-              <div>Temperature: <span id="temp"></span></div>
-              <div>Humidity: <span id="humidity"></span></div>
-              <div>Wind Speed: <span id="wind"></span></div>
-              <div>UV Index: <span id="uvIndex"></span></div>
+              <div class="ml-2">Temperature: <span id="temp"></span></div>
+              <div class="ml-2">Humidity: <span id="humidity"></span></div>
+              <div class="ml-2">Wind Speed: <span id="wind"></span></div>
+              <div class="ml-2">UV Index: <span id="uvIndex"></span></div>
             </div>
             <div id="forecast">
               <h2>5-Day Forecast:</h2>
@@ -60,27 +70,27 @@
                 <div
                   style="background-color: blue; color: white;"
                   id="day1"
-                  class="col"
+                  class="col m-2"
                 ></div>
                 <div
                   style="background-color: blue; color: white;"
                   id="day2"
-                  class="col"
+                  class="col m-2"
                 ></div>
                 <div
                   style="background-color: blue; color: white;"
                   id="day3"
-                  class="col"
+                  class="col m-2"
                 ></div>
                 <div
                   style="background-color: blue; color: white;"
                   id="day4"
-                  class="col"
+                  class="col m-2"
                 ></div>
                 <div
                   style="background-color: blue; color: white;"
                   id="day5"
-                  class="col"
+                  class="col m-2"
                 ></div>
               </div>
             </div>
