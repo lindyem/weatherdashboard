@@ -1,5 +1,4 @@
-renderSearchHistory();
-
+//FUNCTIONS
 function renderSearchHistory() {
   $("#searchHistory").empty();
 
@@ -12,19 +11,9 @@ function renderSearchHistory() {
   }
 }
 
-//Event Listeners
-$(".searchHistoryBox").click(function () {
-  var cityName = $(this).attr("city-name");
-  console.log("im in with", cityName);
-});
-
-$("#searchBtn").click(function () {
-  var search = $("#searchInput").val();
-
-  localStorage.setItem(search, search);
-
+function renderWeatherDashboard(city) {
   var key = "1a53eae6d73210b8584d1690b01b9a73";
-  var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${key}&units=imperial`;
+  var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=imperial`;
   $.ajax({
     url: queryURL,
     method: "GET",
@@ -96,6 +85,19 @@ $("#searchBtn").click(function () {
      `);
     });
   });
+}
+
+renderSearchHistory();
+
+//Event Listeners
+$(".searchHistoryBox").click(function () {
+  var cityName = $(this).attr("city-name");
+  renderWeatherDashboard(cityName);
 });
 
-$("#searchHistory").prepend(newDiv);
+$("#searchBtn").click(function () {
+  var search = $("#searchInput").val();
+  localStorage.setItem(search, search);
+  renderSearchHistory();
+  renderWeatherDashboard(search);
+});
