@@ -39,6 +39,17 @@ function renderWeatherDashboard(city) {
       method: "GET",
     }).then(function (response) {
       $("#uvIndex").text(response.value);
+      if (response.value >= 0 && response.value <= 2) {
+        $("#uvIndex").css("background-color", "green");
+      } else if (response.value > 2 && response.value <= 5) {
+        $("#uvIndex").css("background-color", "yellow");
+      } else if (response.value > 5 && response.value <= 7) {
+        $("#uvIndex").css("background-color", "orange");
+      } else if (response.value > 7 && response.value <= 10) {
+        $("#uvIndex").css("background-color", "red");
+      } else {
+        $("#uvIndex").css("background-color", "violet");
+      }
     });
 
     //Render forecast
