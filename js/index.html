@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Click Events</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta charset="utf-8" />
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      iframe {
+        display: none;
+      }
+
+      .videoListItem {
+        border: 1px solid black;
+      }
+    </style>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div style="display: flex;">
+      <div id="videoList"></div>
+      <div>
+        <iframe width="420" height="315"> </iframe>
+      </div>
+    </div>
+
+    <script>
+      //FUNCTION COUNTRY CHANGE
+      function handleCountryChange(lat, lng) {
+        $.ajax({
+          url: `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lng}&key=3c4a02129d58459fb12ee180f07bba97`,
+          method: "GET",
+        }).then(function (response) {
+          var countryCode =
+            response.results[0].components["ISO_3166-1_alpha-2"];
+          renderTopCharts(countryCode);
+        });
+      }
+
+      //YOUTUBE TOP CHARTS FUNCTION
+      function renderTopCharts(countryCode) {
+        $("iframe").css("display", "block");
+        $("#map").css("height", "50%");
+
+        $.ajax({
+          url: `https://www.googleapis.com/youtube/v3/videos/?part=snippet&chart=mostPopular&regionCode=${countryCode}&key=AIzaSyCRwKFOIGwE09uqNuhJJUoOg5Oxa9jbB1M`,
+          method: "GET",
+        }).then(function (response) {
+          $("#videoList").empty();
+
+          for (var i = 0; i < response.items.length; i++) {
+            var newDiv = $("<div>");
+            newDiv.html(`
+              <div class='videoListItem' videoId=${response.items[i].id}> 
+                <div>${response.items[i].snippet.title}</div>
+                <div>${response.items[i].snippet.description}</div>
+                <img src=${response.items[i].snippet.thumbnails.default.url} />
+              </div>
+            `);
+            $("#videoList").append(newDiv);
+          }
+         
+        });
+      }
+
+      //INIT MAP FUNCTION
+      function initMap() {
+        //Sets initial coord
+        var myLatlng = { lat: 0, lng: 0 };
+
+        var map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 3,
+          center: myLatlng,
+        });
+
+        var marker = new google.maps.Marker({
+          position: myLatlng,
+          map: map,
+        });
+
+        map.addListener("click", function (event) {
+          // event.latLng = {lat: 0, lng: 0}
+          marker.setPosition(event.latLng);
+          handleCountryChange(event.latLng.lat(), event.latLng.lng());
+        });
+      }
+    </script>
+    <script
+      async
+      defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCiD21v8wwCf9-QRTr8mM69JblmLXgxBwc&callback=initMap"
+    ></script>
+  </body>
+</html>

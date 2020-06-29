@@ -71,7 +71,7 @@ function renderWeatherDashboard(city) {
       <div>Humidity: ${day1.main.humidity}</div>
      `);
       $("#day2").html(`
-      <div>${moment(day1.dt_text).format("L")}</div>
+      <div>${moment(day2.dt_text).format("L")}</div>
       <div><img src="${`http://openweathermap.org/img/w/${day2.weather[0].icon}.png`}"/></div>
       <div>Temp: ${day2.main.temp}</div>
       <div>Humidity: ${day2.main.humidity}</div>
