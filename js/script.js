@@ -32,7 +32,7 @@ function renderWeatherDashboard(city) {
     $("#weatherInfo").css("display", "block");
 
     //Get uv index
-    var uvURL = `http://api.openweathermap.org/data/2.5/uvi?appid=${key}&lat=${lat}&lon=${lon}`;
+    var uvURL = `https://api.openweathermap.org/data/2.5/uvi?appid=${key}&lat=${lat}&lon=${lon}`;
 
     $.ajax({
       url: uvURL,
